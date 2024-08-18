@@ -1,5 +1,7 @@
 package main
 
+import "reflect"
+
 type SubjectInterface interface {
 	attach(observer ObserverInterface)
 	detach(observer ObserverInterface)
@@ -18,7 +20,12 @@ func (s *Subject) attach(observer ObserverInterface) {
 }
 
 func (s *Subject) detach(observer ObserverInterface) {
-	// TODO
+	for i, ob := range s.observers {
+		//if observer == ob { // 这里涉及到机构体的比较, 需要特别注意 // 参考链接: https://segmentfault.com/a/1190000040099215
+		if reflect.DeepEqual(observer, ob) {
+			s.observers = append(s.observers[:i], s.observers[i+1:]...)
+		}
+	}
 }
 
 func (s *Subject) notifyEmployee() {
