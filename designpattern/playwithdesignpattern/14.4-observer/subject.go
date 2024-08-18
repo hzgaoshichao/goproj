@@ -4,7 +4,7 @@ type SubjectInterface interface {
 	attach(observer ObserverInterface)
 	detach(observer ObserverInterface)
 	notifyEmployee()
-	getSubject() *Subject
+	getSubject() *Subject // 由于接口中不能定义字段, 这个方法用于返回公共的字段结构体
 }
 
 type Subject struct {
