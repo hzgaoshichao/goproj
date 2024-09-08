@@ -2,6 +2,7 @@ package musicinterpreter
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -84,4 +85,22 @@ func (s *Scale) execute(key string, value string) {
 		scale = "高音"
 	}
 	fmt.Printf("%v ", scale)
+}
+
+type Speed struct {
+	ExpressCommon
+}
+
+func (s *Speed) execute(key string, value string) {
+	speed := ""
+	valuei, _ := strconv.Atoi(value)
+	if valuei < 500 {
+		speed = "快速"
+	} else if valuei >= 1000 {
+		speed = "慢速"
+	} else {
+		speed = "中速"
+	}
+
+	fmt.Printf("%v ", speed)
 }
